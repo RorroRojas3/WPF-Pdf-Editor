@@ -1,0 +1,20 @@
+﻿<Window x:Class="PDFEditor.RemovePDFPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDFEditor"
+        mc:Ignorable="d"
+        Title="Window1" Height="326" Width="322">
+    <Grid>
+        <Grid>
+            <Label x:Name="NumOfPagesLabel" Content="Total number of pages: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="NumberOfPagesNumLabel" Content="0" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.066,0.544"/>
+            <Label x:Name="RemovePagesLabel" Content="Select pages to be removed" HorizontalAlignment="Left" Margin="79,53,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="RemovePages" Content="Remove Pages" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.025,0.653" Click="RemovePages_Click"/>
+            <ListBox x:Name="CheckBoxList" Margin="106,105,100,75" HorizontalAlignment="Stretch"/>
+        </Grid>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="-191,-145,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,15 @@
+﻿<Window x:Class="PDFEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDFEditor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="285" Width="527">
+    <Grid HorizontalAlignment="Center" Height="219" Margin="0,28,0,0" VerticalAlignment="Top" Width="507">
+        <Button x:Name="ImageToPDF" Content="Image to PDF" HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top" Click="ImageToPDF_Click"/>
+        <Button x:Name="PDFToImage" Content="PDF to Image" HorizontalAlignment="Left" Margin="150,25,0,0" VerticalAlignment="Top" Click="PDFToImage_Click"/>
+        <Button x:Name="RemovePages" Content="Remove pages from PDF" HorizontalAlignment="Left" Margin="254,25,0,0" VerticalAlignment="Top" Click="RemovePages_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="35,90,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
