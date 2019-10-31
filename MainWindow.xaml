@@ -10,6 +10,6 @@
         <Button x:Name="ImageToPDF" Content="Image to PDF" HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top" Click="ImageToPDF_Click"/>
         <Button x:Name="PDFToImage" Content="PDF to Image" HorizontalAlignment="Left" Margin="150,25,0,0" VerticalAlignment="Top" Click="PDFToImage_Click"/>
         <Button x:Name="RemovePages" Content="Remove pages from PDF" HorizontalAlignment="Left" Margin="254,25,0,0" VerticalAlignment="Top" Click="RemovePages_Click"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="35,90,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="MergePDF" Content="Merge PDFs" HorizontalAlignment="Left" Margin="35,90,0,0" VerticalAlignment="Top" Click="MergePDFs"/>
     </Grid>
 </Window>

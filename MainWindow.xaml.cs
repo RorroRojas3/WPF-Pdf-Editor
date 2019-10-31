@@ -75,5 +75,11 @@ namespace PDFEditor
             RemovePDFPage removePage = new RemovePDFPage();
             removePage.Show();
         }
+
+        private void MergePDFs(object sender, RoutedEventArgs e)
+        {
+            MergePDF merge = new MergePDF();
+            merge.Show();
+        }
     }
 }
