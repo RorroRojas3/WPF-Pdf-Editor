@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>pdfIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

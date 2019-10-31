@@ -81,5 +81,11 @@ namespace PDFEditor
             MergePDF merge = new MergePDF();
             merge.Show();
         }
+
+        private void SplitPDF_Click(object sender, RoutedEventArgs e)
+        {
+            SplitPDF split = new SplitPDF();
+            split.Show();
+        }
     }
 }
