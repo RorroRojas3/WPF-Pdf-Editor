@@ -10,16 +10,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PDFEditor
+namespace PDFEditor.SplitPDF
 {
     /// <summary>
-    /// Interaction logic for SplitPDF.xaml
+    /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class SplitPDF : Window
+    public partial class RemovePagesPDF : Window
     {
-        public SplitPDF()
+        public RemovePagesPDF()
         {
             InitializeComponent();
+        }
+
+        private void ExtractPagesButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

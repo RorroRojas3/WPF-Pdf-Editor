@@ -1,0 +1,16 @@
+﻿<Window x:Class="PDFEditor.SplitPDF.SplitPDF"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDFEditor"
+        mc:Ignorable="d"
+        Title="SplitPDF" Height="338" Width="298">
+    <Grid>
+        <Grid>
+            <Button x:Name="ExtractPagesButton" Content="Extract pages" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="SplitPagesByRangeButton" Content="Split pages by range" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+    </Grid>
+</Window>

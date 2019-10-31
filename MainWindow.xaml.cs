@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Path = System.IO.Path;
-
+using PDFEditor.SplitPDF;
 namespace PDFEditor
 {
     /// <summary>
@@ -84,8 +84,8 @@ namespace PDFEditor
 
         private void SplitPDF_Click(object sender, RoutedEventArgs e)
         {
-            SplitPDF split = new SplitPDF();
-            split.Show();
+            
+            
         }
     }
 }

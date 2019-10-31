@@ -8,7 +8,6 @@ using IronPdf;
 using PdfSharp;
 using SautinSoft;
 using ImageMagick;
-using Ghostscript;
 
 namespace PDFEditor.Helpers
 {
