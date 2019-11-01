@@ -10,6 +10,7 @@ using SautinSoft;
 using ImageMagick;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Windows;
 
 namespace PDFEditor.Helpers
 {
@@ -29,17 +30,25 @@ namespace PDFEditor.Helpers
         /// <returns></returns>
         public static bool ImageToPDF(OpenFileDialog openFileDialog)
         {
-            var fileExtension = Path.GetExtension(openFileDialog.FileName);
-            if (IsFileAnImage(fileExtension))
+            try
             {
-                var dekstopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                var file = $"{dekstopPath}\\{fileName}.pdf";
-                ImageToPdfConverter.ImageToPdf(openFileDialog.FileName).SaveAs(file);
-                return true;
+                var fileExtension = Path.GetExtension(openFileDialog.FileName);
+                if (IsFileAnImage(fileExtension))
+                {
+                    var dekstopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                    var file = $"{dekstopPath}\\{fileName}.pdf";
+                    ImageToPdfConverter.ImageToPdf(openFileDialog.FileName).SaveAs(file);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch(Exception ex)
             {
+                MessageBox.Show($"Error occured: {ex.Message}");
                 return false;
             }
         }
@@ -69,10 +78,9 @@ namespace PDFEditor.Helpers
             }
             catch(Exception ex)
             {
+                MessageBox.Show($"Error occured: {ex.Message}");
                 return false;
             }
         }
-
-
     }
 }

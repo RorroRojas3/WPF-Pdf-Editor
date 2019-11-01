@@ -54,28 +54,36 @@ namespace PDFEditor.SplitPDFForms
         /// <param name="e"></param>
         private void ExtractPDFButton_Click(object sender, RoutedEventArgs e)
         {
-            int index = 0;
-            foreach(var item in CheckBoxList.Items.OfType<CheckBox>())
+            try
             {
-                if(item.IsChecked == false)
+                int index = 0;
+                foreach (var item in CheckBoxList.Items.OfType<CheckBox>())
                 {
-                    index = CheckBoxList.Items.IndexOf(item);
-                    _pdf.RemovePage(index);
+                    if (item.IsChecked == false)
+                    {
+                        index = CheckBoxList.Items.IndexOf(item);
+                        _pdf.RemovePage(index);
+                    }
+                }
+
+                var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                filePath += $"\\extracted.pdf";
+                var newPDF = _pdf.SaveAs(filePath);
+                Close();
+
+                if (newPDF != null)
+                {
+                    MessageBox.Show("Extracted pages from PDF succesfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Could not extract pages from PDF.");
                 }
             }
-
-            var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            filePath += $"\\extracted.pdf";
-            var newPDF = _pdf.SaveAs(filePath);
-            Close();
-
-            if (newPDF !=null)
+            catch(Exception ex)
             {
-                MessageBox.Show("Extracted pages from PDF succesfully!");
-            }
-            else
-            {
-                MessageBox.Show("Could not extract pages from PDF.");
+                MessageBox.Show($"Error occured: {ex.Message}");
+                Close();
             }
         }
     }

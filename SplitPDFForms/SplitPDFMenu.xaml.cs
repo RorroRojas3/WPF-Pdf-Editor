@@ -25,19 +25,36 @@ namespace PDFEditor.SplitPDFForms
 
         private void ExtractPDFButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ShowDialog();
-            ExtractPDF extractPDF = new ExtractPDF(openFileDialog);
-            extractPDF.Show();
-            Close();
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.ShowDialog();
+                ExtractPDF extractPDF = new ExtractPDF(openFileDialog);
+                extractPDF.Show();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
+                Close();
+            }
         }
 
         private void SplitPDFByRangeButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ShowDialog();
-            SplitPDF splitPDF = new SplitPDF(openFileDialog);
-            splitPDF.Show();
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.ShowDialog();
+                SplitPDF splitPDF = new SplitPDF(openFileDialog);
+                splitPDF.Show();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
+                Close();
+            }
         }
     }
 }
