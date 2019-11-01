@@ -1,5 +1,9 @@
 ﻿using Microsoft.Win32;
 using PDFEditor.Helpers;
+using PDFEditor.MergeForms;
+using PDFEditor.PDFToImageForms;
+using PDFEditor.RemoveForms;
+using PDFEditor.SplitPDFForms;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +20,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Path = System.IO.Path;
-using PDFEditor.SplitPDF;
+
+
 namespace PDFEditor
 {
     /// <summary>
@@ -61,7 +66,7 @@ namespace PDFEditor
         /// <param name="e"></param>
         private void PDFToImage_Click(object sender, RoutedEventArgs e)
         {
-            PDFToImageSelection imageSelection = new PDFToImageSelection();
+            PDFToImage imageSelection = new PDFToImage();
             imageSelection.Show();
         }
 
@@ -72,7 +77,7 @@ namespace PDFEditor
         /// <param name="e"></param>
         private void RemovePages_Click(object sender, RoutedEventArgs e)
         {
-            RemovePDFPage removePage = new RemovePDFPage();
+            RemovePDF removePage = new RemovePDF();
             removePage.Show();
         }
 
@@ -84,7 +89,8 @@ namespace PDFEditor
 
         private void SplitPDF_Click(object sender, RoutedEventArgs e)
         {
-            
+            SplitPDF split = new SplitPDF();
+            split.Show();
             
         }
     }

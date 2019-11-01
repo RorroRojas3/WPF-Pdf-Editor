@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Linq;
 using Path = System.IO.Path;
 
-namespace PDFEditor
+namespace PDFEditor.MergeForms
 {
     /// <summary>
     /// Interaction logic for MergePDF.xaml

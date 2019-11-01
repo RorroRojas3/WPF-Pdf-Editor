@@ -1,4 +1,4 @@
-﻿<Window x:Class="PDFEditor.PDFToImageSelection"
+﻿<Window x:Class="PDFEditor.PDFToImageForms.PDFToImage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
             <RadioButton x:Name="PDFToPNG" Content="PDF to PNG" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="PDFToJPEG" Content="PDF to JPEG" HorizontalAlignment="Center" Margin="0,84,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="PDFToGIF" Content="PDF to GIF" HorizontalAlignment="Center" Margin="0,143,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.522,-1.828"/>
-            <Button x:Name="PDFToImage" Content="Select" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" Height="31" Width="75" Click="PDFToImage_Click"/>
+            <Button x:Name="PDFToImageButton" Content="Select" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" Height="31" Width="75" Click="PDFToImageButton_Click"/>
         </Grid>
 
     </Grid>

@@ -10,14 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PDFEditor.SplitPDF
+namespace PDFEditor.SplitPDFForms
 {
     /// <summary>
-    /// Interaction logic for SplitPDF.xaml
+    /// Interaction logic for ExtractPDF.xaml
     /// </summary>
-    public partial class SplitPDF : Window
+    public partial class ExtractPDF : Window
     {
-        public SplitPDF()
+        public ExtractPDF()
         {
             InitializeComponent();
         }

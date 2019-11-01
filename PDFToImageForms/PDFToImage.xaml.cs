@@ -12,19 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PDFEditor
+namespace PDFEditor.PDFToImageForms
 {
     /// <summary>
     /// Interaction logic for PDFToImageSelection.xaml
     /// </summary>
-    public partial class PDFToImageSelection : Window
+    public partial class PDFToImage : Window
     {
-        public PDFToImageSelection()
+        public PDFToImage()
         {
             InitializeComponent();
         }
 
-        private void PDFToImage_Click(object sender, RoutedEventArgs e)
+        private void PDFToImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             bool result = false;

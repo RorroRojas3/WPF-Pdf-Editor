@@ -15,16 +15,16 @@ using System.Windows.Shapes;
 using System.Linq;
 using Path = System.IO.Path;
 
-namespace PDFEditor
+namespace PDFEditor.RemoveForms
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class RemovePDFPage : Window
+    public partial class RemovePDF : Window
     {
         private readonly OpenFileDialog _openFileDialog;
         private readonly PdfDocument _pdf;
-        public RemovePDFPage()
+        public RemovePDF()
         {
             InitializeComponent();
             OpenFileDialog openFileDialog = new OpenFileDialog();
