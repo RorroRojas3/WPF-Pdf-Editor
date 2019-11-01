@@ -1,5 +1,8 @@
-﻿using System;
+﻿using IronPdf;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +20,55 @@ namespace PDFEditor.SplitPDFForms
     /// </summary>
     public partial class ExtractPDF : Window
     {
-        public ExtractPDF()
+        private OpenFileDialog _openFileDialog;
+        private PdfDocument _pdf;
+        public ExtractPDF(OpenFileDialog openFileDialog)
         {
+            _openFileDialog = openFileDialog;
+            _pdf = new PdfDocument(openFileDialog.FileName);
             InitializeComponent();
+            ShowPDFInformation();
+        }
+
+        private void ShowPDFInformation()
+        {
+            NumOfPages.Content = _pdf.PageCount;
+            
+            for(var i = 0; i < _pdf.PageCount; i++)
+            {
+                CheckBox checkBox = new CheckBox
+                {
+                    Content = $"Page {i + 1}"
+                };
+                CheckBoxList.Items.Add(checkBox);
+            }
+        }
+
+        private void ExtractPDFButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = 0;
+            foreach(var item in CheckBoxList.Items.OfType<CheckBox>())
+            {
+                if(item.IsChecked == false)
+                {
+                    index = CheckBoxList.Items.IndexOf(item);
+                    _pdf.RemovePage(index);
+                }
+            }
+
+            var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            filePath += $"\\extracted.pdf";
+            var newPDF = _pdf.SaveAs(filePath);
+            Close();
+
+            if (newPDF !=null)
+            {
+                MessageBox.Show("Extracted pages from PDF succesfully!");
+            }
+            else
+            {
+                MessageBox.Show("Could not extract pages from PDF.");
+            }
         }
     }
 }

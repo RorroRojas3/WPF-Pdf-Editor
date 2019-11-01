@@ -89,7 +89,7 @@ namespace PDFEditor
 
         private void SplitPDF_Click(object sender, RoutedEventArgs e)
         {
-            SplitPDF split = new SplitPDF();
+            SplitPDFMenu split = new SplitPDFMenu();
             split.Show();
             
         }

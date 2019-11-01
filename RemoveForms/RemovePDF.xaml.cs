@@ -47,7 +47,7 @@ namespace PDFEditor.RemoveForms
             {
                 CheckBox checkBox = new CheckBox
                 {
-                    Content = $"Page {i}"
+                    Content = $"Page {i + 1}"
                 };
                 CheckBoxList.Items.Add(checkBox);
             }
