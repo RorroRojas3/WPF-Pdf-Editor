@@ -2,6 +2,7 @@
 using PDFEditor.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,15 +34,15 @@ namespace PDFEditor.PDFToImageForms
             {
                 if (PDFToPNG != null)
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".png");
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".png", ImageFormat.Png);
                 }
                 else if (PDFToJPEG != null)
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".jpeg");
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".jpeg", ImageFormat.Jpeg);
                 }
                 else
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".gif");
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".gif", ImageFormat.Gif);
                 }
             }
 
