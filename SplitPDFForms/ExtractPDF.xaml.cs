@@ -30,6 +30,9 @@ namespace PDFEditor.SplitPDFForms
             ShowPDFInformation();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void ShowPDFInformation()
         {
             NumOfPages.Content = _pdf.PageCount;
@@ -44,6 +47,11 @@ namespace PDFEditor.SplitPDFForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExtractPDFButton_Click(object sender, RoutedEventArgs e)
         {
             int index = 0;
