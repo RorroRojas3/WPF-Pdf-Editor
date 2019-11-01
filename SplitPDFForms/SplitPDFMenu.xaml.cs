@@ -31,5 +31,13 @@ namespace PDFEditor.SplitPDFForms
             extractPDF.Show();
             Close();
         }
+
+        private void SplitPDFByRangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            SplitPDF splitPDF = new SplitPDF(openFileDialog);
+            splitPDF.Show();
+        }
     }
 }
