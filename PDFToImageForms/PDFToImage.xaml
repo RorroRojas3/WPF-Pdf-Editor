@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFEditor"
         mc:Ignorable="d"
-        Title="PDFToImageSelection" Height="262" Width="191">
+        Title="PDFToImageSelection" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="214" Width="190">
     <Grid>
-        <Grid>
-            <RadioButton x:Name="PDFToPNG" Content="PDF to PNG" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="PDFToJPEG" Content="PDF to JPEG" HorizontalAlignment="Center" Margin="0,84,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="PDFToGIF" Content="PDF to GIF" HorizontalAlignment="Center" Margin="0,143,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.522,-1.828"/>
-            <Button x:Name="PDFToImageButton" Content="Select" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" Height="31" Width="75" Click="PDFToImageButton_Click"/>
-        </Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <RadioButton x:Name="PDFToPNG" Content="PDF to PNG" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="15" Width="82"/>
+        <RadioButton x:Name="PDFToJPEG" Content="PDF to JPEG" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" Height="15" Width="82"/>
+        <RadioButton x:Name="PDFToGIF" Content="PDF to GIF" HorizontalAlignment="Left" Margin="54,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.522,-1.828" Height="15" Width="75"/>
+        <Button x:Name="PDFToImageButton" Content="Select" HorizontalAlignment="Left" Margin="56,137,0,0" VerticalAlignment="Top" Height="30" Width="74" Click="PDFToImageButton_Click" RenderTransformOrigin="0.52,-0.208"/>
+        <RadioButton x:Name="PDFToTIFF" Content="PDF to TIFF" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,84,0,0" Height="15" Width="79"/>
+        <RadioButton x:Name="PDFToBMP" Content="PDF to BMP" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Height="15" Width="82"/>
     </Grid>
 </Window>

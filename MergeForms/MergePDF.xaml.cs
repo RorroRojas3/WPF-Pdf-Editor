@@ -29,21 +29,28 @@ namespace PDFEditor.MergeForms
 
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
-            PDFNameListBox.Items.Clear();
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
-            openFileDialog.ShowDialog();
-
-            foreach (var item in openFileDialog.FileNames)
+            try
             {
-                var fileName = Path.GetFileNameWithoutExtension(item);
-                RadioButton radioButton = new RadioButton
+                PDFNameListBox.Items.Clear();
+
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Multiselect = true;
+                openFileDialog.ShowDialog();
+
+                foreach (var item in openFileDialog.FileNames)
                 {
-                    Content = fileName,
-                };
-                PDFNameListBox.Items.Add(radioButton);
-                _pdf.Add(fileName, item);
+                    var fileName = Path.GetFileNameWithoutExtension(item);
+                    RadioButton radioButton = new RadioButton
+                    {
+                        Content = fileName,
+                    };
+                    PDFNameListBox.Items.Add(radioButton);
+                    _pdf.Add(fileName, item);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
             }
         }
 
@@ -54,32 +61,39 @@ namespace PDFEditor.MergeForms
         /// <param name="e"></param>
         private void UpButton_Click(object sender, RoutedEventArgs e)
         {
-            RadioButton selectedRadioBtn = PDFNameListBox.Items.OfType<RadioButton>().Where(x => x.IsChecked == true).FirstOrDefault();
-            List<RadioButton> radioButtons = new List<RadioButton>();
-            int index = PDFNameListBox.Items.IndexOf(selectedRadioBtn);
-            if (index > 0)
+            try
             {
-                foreach (var item in PDFNameListBox.Items.OfType<RadioButton>())
+                RadioButton selectedRadioBtn = PDFNameListBox.Items.OfType<RadioButton>().Where(x => x.IsChecked == true).FirstOrDefault();
+                List<RadioButton> radioButtons = new List<RadioButton>();
+                int index = PDFNameListBox.Items.IndexOf(selectedRadioBtn);
+                if (index > 0)
                 {
-                    radioButtons.Add(item);
+                    foreach (var item in PDFNameListBox.Items.OfType<RadioButton>())
+                    {
+                        radioButtons.Add(item);
+                    }
+
+                    RadioButton tempRadioBtn = new RadioButton();
+                    tempRadioBtn = radioButtons[index - 1];
+                    radioButtons[index - 1] = selectedRadioBtn;
+                    radioButtons[index] = tempRadioBtn;
+
+                    var selectedPDF = _pdf[selectedRadioBtn.Content.ToString()];
+                    var tempPDF = _pdf[tempRadioBtn.Content.ToString()];
+                    _pdf[tempRadioBtn.Content.ToString()] = selectedPDF;
+                    _pdf[selectedRadioBtn.Content.ToString()] = tempPDF;
+
+                    PDFNameListBox.Items.Clear();
+
+                    foreach (var item in radioButtons)
+                    {
+                        PDFNameListBox.Items.Add(item);
+                    }
                 }
-
-                RadioButton tempRadioBtn = new RadioButton();
-                tempRadioBtn = radioButtons[index - 1];
-                radioButtons[index - 1] = selectedRadioBtn;
-                radioButtons[index] = tempRadioBtn;
-
-                var selectedPDF = _pdf[selectedRadioBtn.Content.ToString()];
-                var tempPDF = _pdf[tempRadioBtn.Content.ToString()];
-                _pdf[tempRadioBtn.Content.ToString()] = selectedPDF;
-                _pdf[selectedRadioBtn.Content.ToString()] = tempPDF;
-
-                PDFNameListBox.Items.Clear();
-
-                foreach(var item in radioButtons)
-                {
-                    PDFNameListBox.Items.Add(item);
-                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
             }
         }
 
@@ -90,32 +104,39 @@ namespace PDFEditor.MergeForms
         /// <param name="e"></param>
         private void DownButton_Click(object sender, RoutedEventArgs e)
         {
-            RadioButton selectedRadioBtn = PDFNameListBox.Items.OfType<RadioButton>().Where(x => x.IsChecked == true).FirstOrDefault();
-            List<RadioButton> radioButtons = new List<RadioButton>();
-            int index = PDFNameListBox.Items.IndexOf(selectedRadioBtn);
-            if ((index != (PDFNameListBox.Items.Count - 1)) && (index < PDFNameListBox.Items.Count - 1))
+            try
             {
-                foreach (var item in PDFNameListBox.Items.OfType<RadioButton>())
+                RadioButton selectedRadioBtn = PDFNameListBox.Items.OfType<RadioButton>().Where(x => x.IsChecked == true).FirstOrDefault();
+                List<RadioButton> radioButtons = new List<RadioButton>();
+                int index = PDFNameListBox.Items.IndexOf(selectedRadioBtn);
+                if ((index != (PDFNameListBox.Items.Count - 1)) && (index < PDFNameListBox.Items.Count - 1))
                 {
-                    radioButtons.Add(item);
+                    foreach (var item in PDFNameListBox.Items.OfType<RadioButton>())
+                    {
+                        radioButtons.Add(item);
+                    }
+
+                    RadioButton tempRadioBtn = new RadioButton();
+                    tempRadioBtn = radioButtons[index + 1];
+                    radioButtons[index + 1] = selectedRadioBtn;
+                    radioButtons[index] = tempRadioBtn;
+                    PDFNameListBox.Items.Clear();
+
+                    var selectedPDF = _pdf[selectedRadioBtn.Content.ToString()];
+                    var tempPDF = _pdf[tempRadioBtn.Content.ToString()];
+                    _pdf[tempRadioBtn.Content.ToString()] = selectedPDF;
+                    _pdf[selectedRadioBtn.Content.ToString()] = tempPDF;
+
+
+                    foreach (var item in radioButtons)
+                    {
+                        PDFNameListBox.Items.Add(item);
+                    }
                 }
-
-                RadioButton tempRadioBtn = new RadioButton();
-                tempRadioBtn = radioButtons[index + 1];
-                radioButtons[index + 1] = selectedRadioBtn;
-                radioButtons[index] = tempRadioBtn;
-                PDFNameListBox.Items.Clear();
-
-                var selectedPDF = _pdf[selectedRadioBtn.Content.ToString()];
-                var tempPDF = _pdf[tempRadioBtn.Content.ToString()];
-                _pdf[tempRadioBtn.Content.ToString()] = selectedPDF;
-                _pdf[selectedRadioBtn.Content.ToString()] = tempPDF;
-
-
-                foreach (var item in radioButtons)
-                {
-                    PDFNameListBox.Items.Add(item);
-                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
             }
         }
 
@@ -126,12 +147,19 @@ namespace PDFEditor.MergeForms
         /// <param name="e"></param>
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            RadioButton selectedRadioBtn = PDFNameListBox.Items.OfType<RadioButton>().Where(x => x.IsChecked == true).FirstOrDefault();
-            if (selectedRadioBtn != null)
+            try
             {
-                int index = PDFNameListBox.Items.IndexOf(selectedRadioBtn);
-                PDFNameListBox.Items.RemoveAt(index);
-                _pdf.Remove(selectedRadioBtn.Content.ToString());
+                RadioButton selectedRadioBtn = PDFNameListBox.Items.OfType<RadioButton>().Where(x => x.IsChecked == true).FirstOrDefault();
+                if (selectedRadioBtn != null)
+                {
+                    int index = PDFNameListBox.Items.IndexOf(selectedRadioBtn);
+                    PDFNameListBox.Items.RemoveAt(index);
+                    _pdf.Remove(selectedRadioBtn.Content.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
             }
         }
 
@@ -142,17 +170,26 @@ namespace PDFEditor.MergeForms
         /// <param name="e"></param>
         private void MergePDFs_Click(object sender, RoutedEventArgs e)
         {
-            List<PdfDocument> pdfs = new List<PdfDocument>();
-            foreach (var item in _pdf)
+            try
             {
-                pdfs.Add(PdfDocument.FromFile(item.Value));        
-            }
-            PdfDocument mergePDF = PdfDocument.Merge(pdfs);
+                List<PdfDocument> pdfs = new List<PdfDocument>();
+                foreach (var item in _pdf)
+                {
+                    pdfs.Add(PdfDocument.FromFile(item.Value));
+                }
+                PdfDocument mergePDF = PdfDocument.Merge(pdfs);
 
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            desktopPath += "\\merged.pdf";
-            mergePDF.SaveAs(desktopPath);
-            Close();
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                desktopPath += "\\merged.pdf";
+                mergePDF.SaveAs(desktopPath);
+                Close();
+                MessageBox.Show("PDF merge was successfull!");
+            }
+            catch(Exception ex)
+            {
+                Close();
+                MessageBox.Show($"Error occured: {ex.Message}");
+            }
         }
     }
 }

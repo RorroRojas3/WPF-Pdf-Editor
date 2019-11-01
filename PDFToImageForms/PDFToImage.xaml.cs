@@ -2,6 +2,7 @@
 using PDFEditor.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,35 +27,50 @@ namespace PDFEditor.PDFToImageForms
 
         private void PDFToImageButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            bool result = false;
-
-            if (openFileDialog.ShowDialog() == true)
+            try
             {
-                if (PDFToPNG != null)
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                bool result = false;
+
+                if (openFileDialog.ShowDialog() == true)
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".png");
+                    if (PDFToPNG.IsChecked == true)
+                    {
+                        result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Png);
+                    }
+                    else if (PDFToJPEG.IsChecked == true)
+                    {
+                        result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Jpeg);
+                    }
+                    else if (PDFToGIF.IsChecked == true)
+                    {
+                        result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Gif);
+                    }
+                    else if (PDFToTIFF.IsChecked == true)
+                    {
+                        result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Tiff);
+                    }
+                    else
+                    {
+                        result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Bmp);
+                    }
                 }
-                else if (PDFToJPEG != null)
+
+                if (result)
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".jpeg");
+                    MessageBox.Show("Succesfully converted PDF to image");
                 }
                 else
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".gif");
+                    MessageBox.Show("Could not convert PDF to image");
                 }
+                Close();
             }
-
-            if(result)
+            catch(Exception ex)
             {
-                MessageBox.Show("Succesfully converted PDF to image");
+                MessageBox.Show($"Error occured: {ex.Message}");
+                Close();
             }
-            else
-            {
-                MessageBox.Show("Could not convert PDF to image");
-            }
-
-            Close();
         }
     }
 }

@@ -8,6 +8,9 @@ using IronPdf;
 using PdfSharp;
 using SautinSoft;
 using ImageMagick;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows;
 
 namespace PDFEditor.Helpers
 {
@@ -27,17 +30,25 @@ namespace PDFEditor.Helpers
         /// <returns></returns>
         public static bool ImageToPDF(OpenFileDialog openFileDialog)
         {
-            var fileExtension = Path.GetExtension(openFileDialog.FileName);
-            if (IsFileAnImage(fileExtension))
+            try
             {
-                var dekstopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                var file = $"{dekstopPath}\\{fileName}.pdf";
-                ImageToPdfConverter.ImageToPdf(openFileDialog.FileName).SaveAs(file);
-                return true;
+                var fileExtension = Path.GetExtension(openFileDialog.FileName);
+                if (IsFileAnImage(fileExtension))
+                {
+                    var dekstopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                    var file = $"{dekstopPath}\\{fileName}.pdf";
+                    ImageToPdfConverter.ImageToPdf(openFileDialog.FileName).SaveAs(file);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch(Exception ex)
             {
+                MessageBox.Show($"Error occured: {ex.Message}");
                 return false;
             }
         }
@@ -47,48 +58,29 @@ namespace PDFEditor.Helpers
         /// </summary>
         /// <param name="openFileDialog"></param>
         /// <returns></returns>
-        public static bool PDFToImage(OpenFileDialog openFileDialog, string fileExtension)
+        public static bool PDFToImage(OpenFileDialog openFileDialog, ImageFormat imageFormat)
         {
-            #region WATERMARK
-            //var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            //var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-            //int result = 0;
+            try
+            {
+                var tempFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                tempFilePath += $"\\{fileName}" + "-{0}" + $".{imageFormat.ToString().ToLower()}";
+                PdfDocument pdf = new PdfDocument(openFileDialog.FileName);
 
-            //PdfFocus pdf = new PdfFocus();
-            //pdf.OpenPdf(openFileDialog.FileName);
+                for (var i = 1; i <= pdf.PageCount; i++)
+                {
+                    var newBit = pdf.PageToBitmap(i);
+                    var filePath = String.Format(tempFilePath, i);
+                    newBit.Save(filePath, imageFormat);
+                }
 
-            //pdf.ImageOptions.Dpi = 300;
-            //result = pdf.ToImage(desktopPath, fileName + fileExtension);
-
-            //return result != 0 ? true : false;
-            #endregion
-
-            #region NOTCLEAR
-            //var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            //var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-            //var file = $"{desktopPath}\\{fileName}{fileExtension}";
-            //MagickImageCollection images = new MagickImageCollection();
-            //images.Read(openFileDialog.FileName);
-            //IMagickImage verticalImages = images.AppendVertically();
-            //switch(fileExtension)
-            //{
-            //    case ".png":
-            //        verticalImages.Format = MagickFormat.Png;
-            //        break;
-            //    case ".jpeg":
-            //        verticalImages.Format = MagickFormat.Jpeg;
-            //        break;
-            //    case ".gif":
-            //        verticalImages.Format = MagickFormat.Gif;
-            //        break;
-            //}
-            //verticalImages.Density = new Density(100);
-            //verticalImages.Write(file);
-            #endregion
-
-            return true;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occured: {ex.Message}");
+                return false;
+            }
         }
-
-
     }
 }
