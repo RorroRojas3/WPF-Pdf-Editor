@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFEditor.SplitPDFForms"
         mc:Ignorable="d"
-        Title="ExtractPDF" Height="319" Width="291">
+        Title="ExtractPDF" ResizeMode="NoResize" Height="319" Width="291">
     <Grid>
         <Label x:Name="TotalNumOfPagesLabel" Content="Total number of pages:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="NumOfPages" Content="0" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top"/>
