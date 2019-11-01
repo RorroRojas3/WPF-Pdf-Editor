@@ -32,17 +32,25 @@ namespace PDFEditor.PDFToImageForms
 
             if (openFileDialog.ShowDialog() == true)
             {
-                if (PDFToPNG != null)
+                if (PDFToPNG.IsChecked == true)
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".png", ImageFormat.Png);
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Png);
                 }
-                else if (PDFToJPEG != null)
+                else if (PDFToJPEG.IsChecked == true)
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".jpeg", ImageFormat.Jpeg);
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Jpeg);
+                }
+                else if (PDFToGIF.IsChecked == true)
+                {
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Gif);
+                }
+                else if (PDFToTIFF.IsChecked == true)
+                {
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Tiff);
                 }
                 else
                 {
-                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ".gif", ImageFormat.Gif);
+                    result = ImagesAndPDFHelper.PDFToImage(openFileDialog, ImageFormat.Bmp);
                 }
             }
 

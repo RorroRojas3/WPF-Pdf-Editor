@@ -49,13 +49,13 @@ namespace PDFEditor.Helpers
         /// </summary>
         /// <param name="openFileDialog"></param>
         /// <returns></returns>
-        public static bool PDFToImage(OpenFileDialog openFileDialog, string fileExtension, ImageFormat imageFormat)
+        public static bool PDFToImage(OpenFileDialog openFileDialog, ImageFormat imageFormat)
         {
             try
             {
                 var tempFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                tempFilePath += $"\\{fileName}" + "-{0}" + $"{fileExtension}";
+                tempFilePath += $"\\{fileName}" + "-{0}" + $".{imageFormat.ToString().ToLower()}";
                 PdfDocument pdf = new PdfDocument(openFileDialog.FileName);
 
                 for (var i = 1; i <= pdf.PageCount; i++)
