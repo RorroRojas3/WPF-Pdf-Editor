@@ -183,9 +183,11 @@ namespace PDFEditor.MergeForms
                 desktopPath += "\\merged.pdf";
                 mergePDF.SaveAs(desktopPath);
                 Close();
+                MessageBox.Show("PDF merge was successfull!");
             }
             catch(Exception ex)
             {
+                Close();
                 MessageBox.Show($"Error occured: {ex.Message}");
             }
         }
