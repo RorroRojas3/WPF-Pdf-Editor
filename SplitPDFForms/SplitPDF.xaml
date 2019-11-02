@@ -5,9 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFEditor.SplitPDFForms"
         mc:Ignorable="d"
-        Title="SplitPDF" Height="811" Width="1244">
-    <Grid>
-        <Image x:Name="tempImage" HorizontalAlignment="Left" Height="704" Margin="23,60,0,0" VerticalAlignment="Top" Width="493"/>
-
-    </Grid>
+        Title="SplitPDF" Height="400" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 </Window>

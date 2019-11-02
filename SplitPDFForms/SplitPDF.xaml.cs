@@ -33,15 +33,7 @@ namespace PDFEditor.SplitPDFForms
 
         private void ShowInformation()
         {
-            Bitmap[] bitmaps = _pdf.ToBitmap(300);
-            MemoryStream ms = new MemoryStream();
-            bitmaps[0].Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            ms.Seek(0, SeekOrigin.Begin);
-            image.StreamSource = ms;
-            image.EndInit();
-            tempImage.Source = image;
+            
         }
     }
 }
