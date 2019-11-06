@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="IronPdf" Version="2019.7.0" />
+    <PackageReference Include="iTextSharp-LGPL" Version="4.1.6" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.5" />
+    <PackageReference Include="PDFClown" Version="0.1.2" />
     <PackageReference Include="PdfSharp" Version="1.50.5147" />
     <PackageReference Include="sautinsoft.pdffocus" Version="7.1.9.17" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />

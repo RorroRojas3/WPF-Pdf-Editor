@@ -4,16 +4,19 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using Microsoft.Win32;
-using IronPdf;
 using PdfSharp;
 using SautinSoft;
 using ImageMagick;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows;
-using PdfSharpClass = PdfSharp.Pdf.PdfDocument;
-using PDFSharpPdfPage = PdfSharp.Pdf.PdfPage;
 using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using org.pdfclown.documents;
+using org.pdfclown.files;
+using org.pdfclown.tools;
+using File = org.pdfclown.files.File;
 
 namespace PDFEditor.Helpers
 {
@@ -45,8 +48,8 @@ namespace PDFEditor.Helpers
 
                     // Convert image to PDF
                     Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-                    PdfSharpClass pdf = new PdfSharpClass();
-                    PDFSharpPdfPage page = pdf.Pages.Add();
+                    PdfDocument pdf = new PdfDocument();
+                    PdfPage page = pdf.Pages.Add();
                     XGraphics xGraphics = XGraphics.FromPdfPage(page);
                     XImage xImage = XImage.FromFile(openFileDialog.FileName);
                     xGraphics.DrawImage(xImage, 0, 0, page.Width, page.Height);
@@ -79,13 +82,20 @@ namespace PDFEditor.Helpers
                 var tempFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 tempFilePath += $"\\{fileName}" + "-{0}" + $".{imageFormat.ToString().ToLower()}";
-                PdfDocument pdf = new PdfDocument(openFileDialog.FileName);
 
-                for (var i = 1; i <= pdf.PageCount; i++)
+                File file = new File(openFileDialog.FileName);
+
+                Document document = file.Document;
+                Pages pages = document.Pages;
+
+
+                for (var i = 0; i < pages.Count; i++)
                 {
-                    var newBit = pdf.PageToBitmap(i);
-                    var filePath = String.Format(tempFilePath, i);
-                    newBit.Save(filePath, imageFormat);
+                    Page page = pages[i];
+                    Renderer renderer = new Renderer();
+                    var image = renderer.Render(page, new SizeF(1400, 850));
+                    var filePath = string.Format(tempFilePath, i);
+                    image.Save(filePath, imageFormat);
                 }
 
                 return true;
