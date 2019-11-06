@@ -52,7 +52,9 @@ namespace PDFEditor.Helpers
                     PdfPage page = pdf.Pages.Add();
                     XGraphics xGraphics = XGraphics.FromPdfPage(page);
                     XImage xImage = XImage.FromFile(openFileDialog.FileName);
-                    xGraphics.DrawImage(xImage, 0, 0, page.Width, page.Height);
+                    page.Width = xImage.PixelWidth;
+                    page.Height = xImage.PixelHeight;
+                    xGraphics.DrawImage(xImage, 0, 0, xImage.PixelWidth, xImage.PixelHeight);
                     pdf.Save(file);
                     pdf.Close();
                     
