@@ -16,6 +16,7 @@ using Ghostscript.NET.Rasterizer;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using Ghostscript.NET;
+using Ghostscript.NET.Viewer;
 
 namespace PDFEditor.Helpers
 {
@@ -92,8 +93,8 @@ namespace PDFEditor.Helpers
                 string filePath = "";
 
                 // Set DPI (User will eventually chose)
-                int xDPI = 300;
-                int yDPI = 300;
+                int xDPI = 1200;
+                int yDPI = 1200;
 
                 // PDF to desired image(s)
                 GhostscriptVersionInfo gsVersion = new GhostscriptVersionInfo(gsDllPath);

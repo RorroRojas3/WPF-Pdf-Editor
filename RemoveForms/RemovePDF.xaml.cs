@@ -1,5 +1,4 @@
-﻿using IronPdf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
 using Path = System.IO.Path;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace PDFEditor.RemoveForms
 {
@@ -30,14 +31,14 @@ namespace PDFEditor.RemoveForms
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
             _openFileDialog = openFileDialog;
-            PdfDocument pdf = new PdfDocument(_openFileDialog.FileName);
+            PdfDocument pdf = PdfReader.Open(openFileDialog.FileName);
             _pdf = pdf;
             ShowPDFInformation();
 
         }
 
         /// <summary>
-        /// 
+        ///     Shows PDF information on Window
         /// </summary>
         private void ShowPDFInformation()
         {
@@ -54,7 +55,7 @@ namespace PDFEditor.RemoveForms
         }
 
         /// <summary>
-        /// 
+        ///     Removes selected pages from PDF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -62,28 +63,32 @@ namespace PDFEditor.RemoveForms
         {
             try
             {
+                // Remove pages
                 int i = 0;
                 foreach (var item in CheckBoxList.Items.OfType<CheckBox>())
                 {
                     if (item.IsChecked == true)
                     {
-                        _pdf.RemovePage(i);
+                        _pdf.Pages.RemoveAt(i);
+                        i--;
                     }
                     i++;
                 }
 
+                // Save new PDF
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 var fileName = Path.GetFileNameWithoutExtension(_openFileDialog.FileName);
                 filePath += $"\\{fileName}-Removed.pdf";
-                _pdf.SaveAs(filePath);
+                _pdf.Save(filePath);
                 Close();
                 MessageBox.Show("Deleted selected pages from PDF!");
                 
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 Close();
-                MessageBox.Show("Could not delete pages from PDF.");
+                MessageBox.Show($"Error ocurred: {ex.Message}");
             }
         }
     }
