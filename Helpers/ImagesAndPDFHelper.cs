@@ -5,7 +5,6 @@ using System.Linq;
 using System.IO;
 using Microsoft.Win32;
 using PdfSharp;
-using SautinSoft;
 using ImageMagick;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -13,10 +12,14 @@ using System.Windows;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using iTextSharp;
-
+using Ghostscript.NET.Rasterizer;
+using System.Runtime.InteropServices;
+using System.Reflection;
+using Ghostscript.NET;
 
 namespace PDFEditor.Helpers
 {
+    
     public static class ImagesAndPDFHelper
     {
         private static string[] ImagesExtensions = { ".jpg", ".png", ".gif", ".tiff", ".bpm" };
@@ -74,27 +77,38 @@ namespace PDFEditor.Helpers
         /// </summary>
         /// <param name="openFileDialog"></param>
         /// <returns></returns>
-        public static bool PDFToImage(OpenFileDialog openFileDialog, ImageFormat imageFormat)
+        public static  bool PDFToImage(OpenFileDialog openFileDialog, ImageFormat imageFormat)
         {
             try
             {
+                // Gets DLL of GhostScritp
+                string binPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string gsDllPath = Path.Combine(binPath, Environment.Is64BitProcess ? "gsdll64.dll" : "gsdll32.dll");
+
+                // Get PDF file information
                 var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 var tempFilePath = $"{desktopPath}\\{fileName}" + "-{0}." + $"{imageFormat.ToString().ToLower()}";
                 string filePath = "";
-                int i = 1;
-                MagickImageCollection image = new MagickImageCollection();
-                MagickReadSettings readSettings = new MagickReadSettings();
-                readSettings.Density = new Density(300);
-                readSettings.BackgroundColor = MagickColors.White;
-                image.Read(openFileDialog.FileName, readSettings);
 
-                foreach(var item in image)
+                // Set DPI (User will eventually chose)
+                int xDPI = 300;
+                int yDPI = 300;
+
+                // PDF to desired image(s)
+                GhostscriptVersionInfo gsVersion = new GhostscriptVersionInfo(gsDllPath);
+                using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
                 {
-                    filePath = string.Format(tempFilePath, i);
-                    item.Write(filePath);
-                    i++;
+                    rasterizer.Open(openFileDialog.FileName, gsVersion, false);
+
+                    for (var i = 1; i <= rasterizer.PageCount; i++)
+                    {
+                        filePath = string.Format(tempFilePath, i);
+                        Image img = rasterizer.GetPage(xDPI, yDPI, i);
+                        img.Save(filePath, imageFormat);
+                    }
                 }
+
                 return true;
             }
             catch(Exception ex)
