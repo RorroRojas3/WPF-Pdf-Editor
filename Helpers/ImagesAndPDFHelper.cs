@@ -12,11 +12,8 @@ using System.Drawing.Imaging;
 using System.Windows;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using org.pdfclown.documents;
-using org.pdfclown.files;
-using org.pdfclown.tools;
-using File = org.pdfclown.files.File;
+using iTextSharp;
+
 
 namespace PDFEditor.Helpers
 {
@@ -81,25 +78,23 @@ namespace PDFEditor.Helpers
         {
             try
             {
-                var tempFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                tempFilePath += $"\\{fileName}" + "-{0}" + $".{imageFormat.ToString().ToLower()}";
+                var tempFilePath = $"{desktopPath}\\{fileName}" + "-{0}." + $"{imageFormat.ToString().ToLower()}";
+                string filePath = "";
+                int i = 1;
+                MagickImageCollection image = new MagickImageCollection();
+                MagickReadSettings readSettings = new MagickReadSettings();
+                readSettings.Density = new Density(300);
+                readSettings.BackgroundColor = MagickColors.White;
+                image.Read(openFileDialog.FileName, readSettings);
 
-                File file = new File(openFileDialog.FileName);
-
-                Document document = file.Document;
-                Pages pages = document.Pages;
-
-
-                for (var i = 0; i < pages.Count; i++)
+                foreach(var item in image)
                 {
-                    Page page = pages[i];
-                    Renderer renderer = new Renderer();
-                    var image = renderer.Render(page, new SizeF(1400, 850));
-                    var filePath = string.Format(tempFilePath, i);
-                    image.Save(filePath, imageFormat);
+                    filePath = string.Format(tempFilePath, i);
+                    item.Write(filePath);
+                    i++;
                 }
-
                 return true;
             }
             catch(Exception ex)
