@@ -165,15 +165,14 @@ namespace PDFEditor.MergeForms
         }
 
         /// <summary>
-        /// 
+        ///     Once MergePDF button clicked, merges PDFs into a new PDF file
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MergePDFs_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            { 
                 PdfDocument pdf = new PdfDocument();
                 foreach (var item in _pdf)
                 {
@@ -185,6 +184,7 @@ namespace PDFEditor.MergeForms
                     tempPDF.Close();
                 }
 
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 desktopPath += "\\merged.pdf";
                 pdf.Save(desktopPath);

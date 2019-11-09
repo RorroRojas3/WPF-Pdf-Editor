@@ -31,7 +31,7 @@ namespace PDFEditor.Helpers
         }
 
         /// <summary>
-        /// 
+        ///     Converts Image to a PDF
         /// </summary>
         /// <param name="openFileDialog"></param>
         /// <returns></returns>
@@ -74,7 +74,7 @@ namespace PDFEditor.Helpers
         }
 
         /// <summary>
-        /// 
+        ///     Converts Image to PDF
         /// </summary>
         /// <param name="openFileDialog"></param>
         /// <returns></returns>

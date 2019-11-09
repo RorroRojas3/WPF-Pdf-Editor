@@ -25,6 +25,12 @@ namespace PDFEditor.PDFToImageForms
             InitializeComponent();
         }
 
+        /// <summary>
+        ///     Once PDFToImage button clicked, will convert PDF to image
+        ///     for selected format
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PDFToImageButton_Click(object sender, RoutedEventArgs e)
         {
             try
