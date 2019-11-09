@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ghostscript" Version="9.2.0" />
+    <PackageReference Include="Ghostscript.NET" Version="1.2.1" />
     <PackageReference Include="IronPdf" Version="2019.7.0" />
+    <PackageReference Include="iTextSharp-LGPL" Version="4.1.6" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.5" />
-    <PackageReference Include="sautinsoft.pdffocus" Version="7.1.9.17" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ExampleFiles\" />
   </ItemGroup>
 
 </Project>

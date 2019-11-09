@@ -1,5 +1,4 @@
-﻿using IronPdf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
 using Path = System.IO.Path;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace PDFEditor.MergeForms
 {
@@ -164,24 +165,29 @@ namespace PDFEditor.MergeForms
         }
 
         /// <summary>
-        /// 
+        ///     Once MergePDF button clicked, merges PDFs into a new PDF file
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MergePDFs_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                List<PdfDocument> pdfs = new List<PdfDocument>();
+            { 
+                PdfDocument pdf = new PdfDocument();
                 foreach (var item in _pdf)
                 {
-                    pdfs.Add(PdfDocument.FromFile(item.Value));
+                    var tempPDF = PdfReader.Open(item.Value, PdfDocumentOpenMode.Import);
+                    foreach(var page in tempPDF.Pages)
+                    {
+                        pdf.AddPage(page);
+                    }
+                    tempPDF.Close();
                 }
-                PdfDocument mergePDF = PdfDocument.Merge(pdfs);
 
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 desktopPath += "\\merged.pdf";
-                mergePDF.SaveAs(desktopPath);
+                pdf.Save(desktopPath);
                 Close();
                 MessageBox.Show("PDF merge was successfull!");
             }

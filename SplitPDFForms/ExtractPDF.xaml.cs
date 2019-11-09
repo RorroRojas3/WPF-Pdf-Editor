@@ -1,5 +1,6 @@
-﻿using IronPdf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,13 @@ namespace PDFEditor.SplitPDFForms
         public ExtractPDF(OpenFileDialog openFileDialog)
         {
             _openFileDialog = openFileDialog;
-            _pdf = new PdfDocument(openFileDialog.FileName);
+            _pdf = PdfReader.Open(_openFileDialog.FileName, PdfDocumentOpenMode.Import);
             InitializeComponent();
             ShowPDFInformation();
         }
 
         /// <summary>
-        /// 
+        ///     Loads information into Window
         /// </summary>
         private void ShowPDFInformation()
         {
@@ -48,7 +49,7 @@ namespace PDFEditor.SplitPDFForms
         }
 
         /// <summary>
-        /// 
+        ///  Once extract PDF button clicked, it will extract selected pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -56,32 +57,29 @@ namespace PDFEditor.SplitPDFForms
         {
             try
             {
-                int index = 0;
+                // Remove pages that not wanted 
+                int i = 0;
                 foreach (var item in CheckBoxList.Items.OfType<CheckBox>())
                 {
                     if (item.IsChecked == false)
                     {
-                        index = CheckBoxList.Items.IndexOf(item);
-                        _pdf.RemovePage(index);
+                        _pdf.Pages.RemoveAt(i);
+                        i--;
                     }
+                    i++;
                 }
 
+                // Save PDF
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 filePath += $"\\extracted.pdf";
-                var newPDF = _pdf.SaveAs(filePath);
+                _pdf.Save(filePath);
                 Close();
-
-                if (newPDF != null)
-                {
-                    MessageBox.Show("Extracted pages from PDF succesfully!");
-                }
-                else
-                {
-                    MessageBox.Show("Could not extract pages from PDF.");
-                }
+                MessageBox.Show("Extracted pages from PDF succesfully!");
             }
             catch(Exception ex)
             {
+                MessageBox.Show("Could not extract pages from PDF.");
                 MessageBox.Show($"Error occured: {ex.Message}");
                 Close();
             }
