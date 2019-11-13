@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="285" Width="527">
+        Title="MainWindow" WindowStartupLocation="CenterScreen" Height="285" Width="527">
     <Grid HorizontalAlignment="Center" Height="219" Margin="0,28,0,0" VerticalAlignment="Top" Width="507">
         <Button x:Name="ImageToPDFButton" Content="Image to PDF" HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top" Click="ImageToPDF_Click"/>
         <Button x:Name="PDFToImageButton" Content="PDF to Image" HorizontalAlignment="Left" Margin="150,25,0,0" VerticalAlignment="Top" Click="PDFToImage_Click"/>
