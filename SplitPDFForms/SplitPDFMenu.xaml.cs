@@ -50,19 +50,36 @@ namespace PDFEditor.SplitPDFForms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SplitPDFByRangeButton_Click(object sender, RoutedEventArgs e)
+        private void SplitPDFByCustomRangeButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.ShowDialog();
-                SplitPDFByRange splitPDF = new SplitPDFByRange(openFileDialog);
+                SplitPDFByCustomRange splitPDF = new SplitPDFByCustomRange(openFileDialog);
                 splitPDF.Show();
                 Close();
             }
             catch(Exception ex)
             {
                 MessageBox.Show($"Error occured: {ex.Message}");
+                Close();
+            }
+        }
+
+        private void SplitPDFByFixedRangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.ShowDialog();
+                SplitPDFByFixedRange splitPDFByFixedRange = new SplitPDFByFixedRange(openFileDialog);
+                splitPDFByFixedRange.Show();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occurred: {ex.Message}");
                 Close();
             }
         }

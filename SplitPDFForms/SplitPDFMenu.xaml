@@ -8,6 +8,7 @@
         Title="SplitPDF" Height="306" Width="332" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="ExtractPDFButton" Content="Extract pages" HorizontalAlignment="Center" Margin="0,65,0,0" VerticalAlignment="Top" Click="ExtractPDFButton_Click"/>
-        <Button x:Name="SplitPDFByRangeButton" Content="Split pages by range" HorizontalAlignment="Center" Margin="0,181,0,0" VerticalAlignment="Top" Click="SplitPDFByRangeButton_Click"/>
+        <Button x:Name="SplitPDFByCustomeRangeButton" Content="Split pages by custom range" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Click="SplitPDFByCustomRangeButton_Click"/>
+        <Button x:Name="SplitPDFByFixedRangeButton" Content="Split pages by fixed range" HorizontalAlignment="Center" Margin="0,190,0,0" VerticalAlignment="Top" Click="SplitPDFByFixedRangeButton_Click"/>
     </Grid>
 </Window>

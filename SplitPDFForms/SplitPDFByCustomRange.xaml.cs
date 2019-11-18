@@ -22,11 +22,11 @@ namespace PDFEditor.SplitPDFForms
     /// <summary>
     /// Interaction logic for SplitPDF.xaml
     /// </summary>
-    public partial class SplitPDFByRange : Window
+    public partial class SplitPDFByCustomRange : Window
     {
         private OpenFileDialog _openFileDialog;
         private PdfDocument _pdf;
-        public SplitPDFByRange(OpenFileDialog openFileDialog)
+        public SplitPDFByCustomRange(OpenFileDialog openFileDialog)
         {
             _openFileDialog = openFileDialog;
             _pdf = PdfReader.Open(openFileDialog.FileName, PdfDocumentOpenMode.Import);
