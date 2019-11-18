@@ -1,0 +1,20 @@
+﻿<Window x:Class="PDFEditor.SplitPDFForms.SplitPDFByCustomRange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDFEditor.SplitPDFForms"
+        mc:Ignorable="d"
+        Title="SplitPDF" Height="423" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label x:Name="FromPageLabel" Content="From Page:" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.338,-0.798"/>
+        <Label x:Name="ToPageLabel" Content="To Page:" HorizontalAlignment="Left" Margin="151,20,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.338,-0.798"/>
+        <ListBox x:Name="RangesListBox" Margin="126,95,125,64"/>
+        <Button x:Name="AddRangeButton" Content="Add Range" HorizontalAlignment="Left" Margin="312,23,0,0" VerticalAlignment="Top" Click="AddRangeButton_Click"/>
+        <Label x:Name="RangesLabel" Content="Ranges" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.545,0.04"/>
+        <Button x:Name="SplitPDFButton" Content="Split PDF" HorizontalAlignment="Left" Margin="171,366,0,0" VerticalAlignment="Top" Click="SplitPDFButton_Click"/>
+        <Button x:Name="DeleteRangeButton" Content="Delete Range" HorizontalAlignment="Left" Margin="291,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.085,0.464" Click="DeleteRangeButton_Click"/>
+        <TextBox x:Name="ToPageTextBox" HorizontalAlignment="Left" Margin="210,24,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="26"/>
+        <TextBox x:Name="FromPageTextBox" HorizontalAlignment="Left" Margin="84,25,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="26"/>
+    </Grid>
+</Window>

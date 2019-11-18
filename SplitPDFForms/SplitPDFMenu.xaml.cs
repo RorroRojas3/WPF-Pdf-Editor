@@ -23,6 +23,11 @@ namespace PDFEditor.SplitPDFForms
             InitializeComponent();
         }
 
+        /// <summary>
+        ///  Extract PDF pages
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExtractPDFButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -40,19 +45,41 @@ namespace PDFEditor.SplitPDFForms
             }
         }
 
-        private void SplitPDFByRangeButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        ///     Split PDF by range
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SplitPDFByCustomRangeButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.ShowDialog();
-                SplitPDF splitPDF = new SplitPDF(openFileDialog);
+                SplitPDFByCustomRange splitPDF = new SplitPDFByCustomRange(openFileDialog);
                 splitPDF.Show();
                 Close();
             }
             catch(Exception ex)
             {
                 MessageBox.Show($"Error occured: {ex.Message}");
+                Close();
+            }
+        }
+
+        private void SplitPDFByFixedRangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.ShowDialog();
+                SplitPDFByFixedRange splitPDFByFixedRange = new SplitPDFByFixedRange(openFileDialog);
+                splitPDFByFixedRange.Show();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error occurred: {ex.Message}");
                 Close();
             }
         }
