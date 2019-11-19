@@ -27,7 +27,7 @@ namespace PDFEditor.Helpers
 
         private static bool IsFileAnImage(string fileExtension)
         {
-            return ImagesExtensions.Contains(fileExtension);
+            return ImagesExtensions.Contains(fileExtension.ToLower());
         }
 
         /// <summary>
