@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\pdfIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ghostscript" Version="9.2.0" />
     <PackageReference Include="Ghostscript.NET" Version="1.2.1" />
     <PackageReference Include="IronPdf" Version="2019.7.0" />
@@ -19,6 +23,12 @@
 
   <ItemGroup>
     <Folder Include="ExampleFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\pdfIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

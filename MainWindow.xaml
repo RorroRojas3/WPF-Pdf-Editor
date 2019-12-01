@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFEditor"
         mc:Ignorable="d"
-        Title="PDF Editor" WindowStartupLocation="CenterScreen" Height="604" Width="259" Background="White" AutomationProperties.IsRowHeader="True" ResizeMode="NoResize">
+        Title="PDF Editor" WindowStartupLocation="CenterScreen" Height="604" Width="259" Background="White" AutomationProperties.IsRowHeader="True" ResizeMode="CanResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -18,16 +18,34 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="ImageToPDFButton" Grid.Row="0" Grid.Column="0" Content="Image to PDF"
-                VerticalAlignment="Stretch"  Click="ImageToPDF_Click"/>
+        <Button x:Name="ImageToPDFButton" Grid.Row="0" Grid.Column="0"
+                VerticalAlignment="Stretch"  Click="ImageToPDF_Click">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.Column="0" Source="C:\Users\Rorro\Downloads\temp.png" VerticalAlignment=
+                       "Center" HorizontalAlignment="Stretch" ></Image>
+                <Image Grid.Row="0" Grid.Column="1" Source="C:\Users\Rorro\Downloads\arrow.png" VerticalAlignment="Center" 
+                       HorizontalAlignment="Stretch" Margin="30 0 30 0"></Image>
+                <Image Grid.Row="0" Grid.Column="2" Source="/Images/pdfIcon.png" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Image>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Image to PDF</TextBlock>
+            </Grid>
+        </Button>
         <Button x:Name="PDFToImageButton" Grid.Row="1" Grid.Column="0" Content="PDF to Image" 
-                VerticalAlignment="Stretch" Click="PDFToImage_Click"/>
+                VerticalAlignment="Stretch" Click="PDFToImage_Click"></Button>
         <Button x:Name="RemovePagesButton" Grid.Row="2" Grid.Column="0"  Content="Remove pages from PDF" 
-                VerticalAlignment="Stretch" Click="RemovePages_Click"/>
+                VerticalAlignment="Stretch" Click="RemovePages_Click"></Button>
         <Button x:Name="MergePDFButton" Grid.Row="3" Grid.Column="0" Content="Merge PDFs" 
-                VerticalAlignment="Stretch" Click="MergePDFs"/>
+                VerticalAlignment="Stretch" Click="MergePDFs"></Button>
         <Button x:Name="SplitPDFButton" Grid.Row="4" Grid.Column="0" Content="Split PDF"
-                 VerticalAlignment="Stretch" Click="SplitPDF_Click"/>
+                 VerticalAlignment="Stretch" Click="SplitPDF_Click"></Button>
     </Grid>
 
 </Window>
