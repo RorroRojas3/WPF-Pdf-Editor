@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace PDFEditor.Helpers
 {
@@ -20,6 +21,8 @@ namespace PDFEditor.Helpers
     {
         SaveFileDialog _saveFileDialog;
         string _destination;
+        string _fileName;
+
         public NameAndDestination()
         {
             InitializeComponent();
@@ -31,12 +34,18 @@ namespace PDFEditor.Helpers
         {
             _saveFileDialog.ShowDialog();
             _destination = _saveFileDialog.FileName;
+            _fileName = Path.GetFileNameWithoutExtension(_saveFileDialog.FileName);
             Close();
         }
 
         public string GetDestination()
         {
             return _destination;
+        }
+
+        public string GetFileName()
+        {
+            return _fileName;
         }
     }
 }

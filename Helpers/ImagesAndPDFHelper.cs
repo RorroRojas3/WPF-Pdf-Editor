@@ -17,6 +17,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using Ghostscript.NET;
 using Ghostscript.NET.Viewer;
+using Path = System.IO.Path;
 
 namespace PDFEditor.Helpers
 {
@@ -96,10 +97,18 @@ namespace PDFEditor.Helpers
                 string gsDllPath = Path.Combine(binPath, Environment.Is64BitProcess ? "gsdll64.dll" : "gsdll32.dll");
 
                 // Get PDF file information
-                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                var tempFilePath = $"{desktopPath}\\{fileName}" + "-{0}." + $"{imageFormat.ToString().ToLower()}";
-                string filePath = "";
+                string filePath = string.Empty;
+                NameAndDestination nameAndDestination = new NameAndDestination();
+                nameAndDestination.ShowDialog();
+                var destination = nameAndDestination.GetDestination();
+                destination = Path.GetDirectoryName(destination);
+                var fileName = nameAndDestination.GetFileName();
+                fileName = destination + "\\" + fileName + "-{0}";
+
+                if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(destination))
+                {
+                    return false;
+                }
 
                 // Set DPI (User will eventually chose)
                 int xDPI = 1200;
@@ -113,7 +122,7 @@ namespace PDFEditor.Helpers
 
                     for (var i = 1; i <= rasterizer.PageCount; i++)
                     {
-                        filePath = string.Format(tempFilePath, i);
+                        filePath = string.Format(fileName, i) + $".{imageFormat.ToString().ToLower()}";
                         Image img = rasterizer.GetPage(xDPI, yDPI, i);
                         img.Save(filePath, imageFormat);
                     }
