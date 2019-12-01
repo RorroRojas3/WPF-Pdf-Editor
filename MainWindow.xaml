@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <Button x:Name="ImageToPDFButton" Grid.Row="0" Grid.Column="0"
-                VerticalAlignment="Stretch"  Click="ImageToPDF_Click" Background="#FF533A71">
+                VerticalAlignment="Stretch"  Click="ImageToPDF_Click" Background="#FF533A71" BorderBrush="#FF533A71">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -35,11 +35,11 @@
                 <Image Grid.Row="0" Grid.Column="1" Source="/Images/arrowIcon.png" VerticalAlignment="Center" 
                        HorizontalAlignment="Stretch" Margin="30 0 30 0"></Image>
                 <Image Grid.Row="0" Grid.Column="2" Source="/Images/pdfIcon2.png" VerticalAlignment="Center" HorizontalAlignment="Stretch" ></Image>
-                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16">Image to PDF</TextBlock>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16">Images to PDF</TextBlock>
             </Grid>
         </Button>
         <Button x:Name="PDFToImageButton" Grid.Row="1" Grid.Column="0"
-                VerticalAlignment="Stretch" Click="PDFToImage_Click" Background="#FF6184D8">
+                VerticalAlignment="Stretch" Click="PDFToImage_Click" Background="#FF6184D8" BorderBrush="#FF6184D8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -60,7 +60,7 @@
         </Grid>
     </Button>
         <Button x:Name="RemovePagesButton" Grid.Row="2" Grid.Column="0"
-                VerticalAlignment="Stretch" Click="RemovePages_Click" Background="#FF50C5B7">
+                VerticalAlignment="Stretch" Click="RemovePages_Click" Background="#FF50C5B7" BorderBrush="#FF50C5B7">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -71,7 +71,7 @@
             </Grid>
         </Button>
         <Button x:Name="MergePDFButton" Grid.Row="3" Grid.Column="0"
-                VerticalAlignment="Stretch" Click="MergePDFs" Background="#FF9CEC5B">
+                VerticalAlignment="Stretch" Click="MergePDFs" Background="#FF9CEC5B" BorderBrush="#FF9CEC5B">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -82,7 +82,7 @@
             </Grid>
         </Button>
         <Button x:Name="SplitPDFButton" Grid.Row="4" Grid.Column="0"
-                 VerticalAlignment="Stretch" Click="SplitPDF_Click" Background="#FFF0F465">
+                 VerticalAlignment="Stretch" Click="SplitPDF_Click" Background="#FFF0F465" BorderBrush="#FFF0F465">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>

@@ -42,10 +42,12 @@ namespace PDFEditor
         private void ImageToPDF_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
             bool result = false;
             
             if (openFileDialog.ShowDialog() == true)
             {
+
                 result = ImagesAndPDFHelper.ImageToPDF(openFileDialog);
             }
 
