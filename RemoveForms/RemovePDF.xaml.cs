@@ -28,13 +28,13 @@ namespace PDFEditor.RemoveForms
         public RemovePDF()
         {
             InitializeComponent();
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ShowDialog();
-            _openFileDialog = openFileDialog;
-            PdfDocument pdf = PdfReader.Open(openFileDialog.FileName);
-            _pdf = pdf;
-            ShowPDFInformation();
-
+            _openFileDialog = new OpenFileDialog();
+            _openFileDialog.ShowDialog();
+            if (!string.IsNullOrEmpty(_openFileDialog.FileName))
+            {
+                _pdf = PdfReader.Open(_openFileDialog.FileName);
+                ShowPDFInformation();
+            }
         }
 
         /// <summary>
