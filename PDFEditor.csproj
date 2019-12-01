@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\arrowIcon.png" />
+    <None Remove="Images\imageIcon.png" />
+    <None Remove="Images\mergePDFIcon.png" />
+    <None Remove="Images\pdfIcon.png" />
+    <None Remove="Images\pdfIcon2.png" />
+    <None Remove="Images\removePageIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ghostscript" Version="9.2.0" />
     <PackageReference Include="Ghostscript.NET" Version="1.2.1" />
     <PackageReference Include="IronPdf" Version="2019.7.0" />
@@ -19,6 +28,27 @@
 
   <ItemGroup>
     <Folder Include="ExampleFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\arrowIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\imageIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mergePDFIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pdfIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pdfIcon2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\removePageIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
