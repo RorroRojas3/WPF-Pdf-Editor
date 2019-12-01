@@ -17,6 +17,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using Ghostscript.NET;
 using Ghostscript.NET.Viewer;
+using Path = System.IO.Path;
 
 namespace PDFEditor.Helpers
 {
@@ -39,32 +40,41 @@ namespace PDFEditor.Helpers
         {
             try
             {
-                var fileExtension = Path.GetExtension(openFileDialog.FileName);
-                if (IsFileAnImage(fileExtension))
+                PdfDocument pdf = new PdfDocument();
+                foreach (var item in openFileDialog.FileNames)
                 {
-                    // Get the path for Dekstop
-                    var dekstopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                    var file = $"{dekstopPath}\\{fileName}.pdf";
+                    var fileExtension = Path.GetExtension(item);
+                    if (IsFileAnImage(fileExtension))
+                    {
+                        // Convert image to PDF
+                        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);      
+                        PdfPage page = pdf.Pages.Add();
+                        XGraphics xGraphics = XGraphics.FromPdfPage(page);
+                        XImage xImage = XImage.FromFile(item);
+                        page.Width = xImage.PixelWidth;
+                        page.Height = xImage.PixelHeight;
+                        xGraphics.DrawImage(xImage, 0, 0, xImage.PixelWidth, xImage.PixelHeight);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
+                // Get path where file will be saved
+                NameAndDestination nameAndDestination = new NameAndDestination();
+                nameAndDestination.ShowDialog();
+                var destination = nameAndDestination.GetDestination();
 
-                    // Convert image to PDF
-                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-                    PdfDocument pdf = new PdfDocument();
-                    PdfPage page = pdf.Pages.Add();
-                    XGraphics xGraphics = XGraphics.FromPdfPage(page);
-                    XImage xImage = XImage.FromFile(openFileDialog.FileName);
-                    page.Width = xImage.PixelWidth;
-                    page.Height = xImage.PixelHeight;
-                    xGraphics.DrawImage(xImage, 0, 0, xImage.PixelWidth, xImage.PixelHeight);
-                    pdf.Save(file);
+                if (!string.IsNullOrEmpty(destination))
+                {
+                    destination += ".pdf";
+                    pdf.Save(destination);
                     pdf.Close();
-                    
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+
+                return false ;
             }
             catch(Exception ex)
             {
@@ -87,10 +97,18 @@ namespace PDFEditor.Helpers
                 string gsDllPath = Path.Combine(binPath, Environment.Is64BitProcess ? "gsdll64.dll" : "gsdll32.dll");
 
                 // Get PDF file information
-                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                var tempFilePath = $"{desktopPath}\\{fileName}" + "-{0}." + $"{imageFormat.ToString().ToLower()}";
-                string filePath = "";
+                string filePath = string.Empty;
+                NameAndDestination nameAndDestination = new NameAndDestination();
+                nameAndDestination.ShowDialog();
+                var destination = nameAndDestination.GetDestination();
+                destination = Path.GetDirectoryName(destination);
+                var fileName = nameAndDestination.GetFileName();
+                fileName = destination + "\\" + fileName + "-{0}";
+
+                if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(destination))
+                {
+                    return false;
+                }
 
                 // Set DPI (User will eventually chose)
                 int xDPI = 1200;
@@ -104,7 +122,7 @@ namespace PDFEditor.Helpers
 
                     for (var i = 1; i <= rasterizer.PageCount; i++)
                     {
-                        filePath = string.Format(tempFilePath, i);
+                        filePath = string.Format(fileName, i) + $".{imageFormat.ToString().ToLower()}";
                         Image img = rasterizer.GetPage(xDPI, yDPI, i);
                         img.Save(filePath, imageFormat);
                     }
