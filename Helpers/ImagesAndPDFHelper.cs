@@ -24,7 +24,7 @@ namespace PDFEditor.Helpers
     
     public static class ImagesAndPDFHelper
     {
-        private static string[] ImagesExtensions = { ".jpg", ".png", ".gif", ".tiff", ".bpm" };
+        private static string[] ImagesExtensions = {".jpg", ".jpeg", ".png", ".gif", ".tiff", ".bpm" };
 
         private static bool IsFileAnImage(string fileExtension)
         {
