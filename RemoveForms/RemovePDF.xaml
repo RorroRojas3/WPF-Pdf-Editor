@@ -5,16 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFEditor"
         mc:Ignorable="d"
-        Title="Window1" Height="326" Width="322">
+        Title="Remove Pages" Height="326" Width="322" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid>
-            <Label x:Name="NumOfPagesLabel" Content="Total number of pages: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="NumberOfPagesNumLabel" Content="0" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.066,0.544"/>
-            <Label x:Name="RemovePagesLabel" Content="Select pages to be removed" HorizontalAlignment="Left" Margin="79,53,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="RemovePages" Content="Remove Pages" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.025,0.653" Click="RemovePages_Click"/>
-            <ListBox x:Name="CheckBoxList" Margin="106,105,100,75" HorizontalAlignment="Stretch"/>
-        </Grid>
-        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="-191,-145,0,0" VerticalAlignment="Top"/>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
+            <Label x:Name="NumOfPagesLabel" Grid.Row="0" Grid.Column="0" Content="Total number of pages: " HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+            <Label x:Name="NumberOfPagesNumLabel" Grid.Row="0" Grid.Column="1" Content="0" HorizontalAlignment="Left"  VerticalAlignment="Center" />
+            <Label x:Name="RemovePagesLabel" Grid.Row="1" Grid.ColumnSpan="2" Content="Select pages to be removed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ListBox x:Name="CheckBoxList" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0"/>
+            <Button x:Name="RemovePages" Grid.Row="3" Grid.ColumnSpan="2" Content="Remove Pages" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemovePages_Click"/>
+        </Grid>
     </Grid>
 </Window>
